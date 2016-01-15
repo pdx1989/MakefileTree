@@ -51,19 +51,20 @@ void dfs(string cur, int depth){
             }
         }
     }
+    ff.close();
 }
 
 int main(int argc, char **argv, char** envp){
     char** env;
-    for (env = envp; *env != 0; env++){
+    for (env=envp;*env!=0;env++){
         char* thisEnv = *env;
-        string tmp(thisEnv);
-        int i = tmp.find('=');
+        string str(thisEnv);
+        int i = str.find('=');
         if (i != string::npos)
-            dict[tmp.substr(0,i)] = tmp.substr(i+1);	
+            dict[str.substr(0,i)] = str.substr(i+1);	
     }
-    dict["TOPDIR"]="";
-    dict["BUILD_SYSTEM"]="build/core";
+    dict["TOPDIR"] = "";
+    dict["BUILD_SYSTEM"] = "build/core";
     cout<<"|-Makefile"<<endl;
     dfs("Makefile",1);
 }

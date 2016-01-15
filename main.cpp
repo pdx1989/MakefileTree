@@ -13,8 +13,8 @@ string deal(string inp){
         int j = inp.find(')') - 1;
         string ident = inp.substr(i, j-i+1);
         if (dict.find(ident) != dict.end())
-	    inp.replace(i-2, ident.length() + 3, dict[ident]);
-	else return "";
+            inp.replace(i-2, ident.length() + 3, dict[ident]);
+        else return "";
     } 
     return inp;
 }
@@ -30,9 +30,9 @@ void dfs(string cur, int depth){
     ifstream ff;
     ff.open(cur.c_str());
     if (!ff){
-	print(depth);
+        print(depth);
         cout<<"Not found: "<<cur<<endl;
-	return;
+        return;
     }
     map<string,int> flag;
     char st[1024];
@@ -42,16 +42,14 @@ void dfs(string cur, int depth){
             string next = deal(str.substr(8));
             if (flag.find(str) == flag.end()){
 		print(depth);
+		flag[str] = 1;
 		if (next.length() > 0){
 		    cout<<next<<endl;
-                    flag[str] = 1;
                     dfs(deal(next),depth+1);
-	        }else{
+	        }else
 		    cout<<"Not Found: "<<str<<endl;
-		    flag[str] = 1;
-	        }
-	    }
-	}
+            }
+        }
     }
 }
 
@@ -62,7 +60,7 @@ int main(int argc, char **argv, char** envp){
         string tmp(thisEnv);
         int i = tmp.find('=');
         if (i != string::npos)
-	    dict[tmp.substr(0,i)] = tmp.substr(i+1);	
+            dict[tmp.substr(0,i)] = tmp.substr(i+1);	
     }
     dict["TOPDIR"]="";
     dict["BUILD_SYSTEM"]="build/core";
